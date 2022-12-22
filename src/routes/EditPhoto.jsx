@@ -10,7 +10,7 @@ const EditPhoto = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const dataPhoto = async() =>{
+  const dataPhoto = async () => {
     const pict = await fetch(`https://gallery-app-server.vercel.app/photos/${id}`)
     const response = await pict.json();
     response.error && setError(response.error);

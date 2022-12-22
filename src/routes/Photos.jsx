@@ -53,6 +53,9 @@ const Photos = () => {
       setPhotos(json);
       setLoading(false)
     })
+    .catch((error) => {
+      setError(error);
+    });
   }, []);
 
   if (error) return <h1 style={{ width: "100%", textAlign: "center", marginTop: "20px" }} >Error!</h1>;

@@ -27,6 +27,9 @@ const AddPhoto = () => {
       console.log(json);
       navigate("/photos")
     })
+    .catch((error) => {
+      setError(error);
+    });
   };
 
   return (
