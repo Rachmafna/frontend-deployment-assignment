@@ -10,13 +10,6 @@ const EditPhoto = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const dataPhoto = async () => {
-    const pict = await fetch(`https://gallery-app-server.vercel.app/photos/${id}`)
-    const response = await pict.json();
-    response.error && setError(response.error);
-    setImageUrl(response.imageUrl);
-    setCaptions(response.captions);
-  }
 
   const editPhoto = async (e) => {
     e.preventDefault();
@@ -32,8 +25,18 @@ const EditPhoto = () => {
   useEffect(() => {
     setLoading(true);
     // TODO: answer here
-    dataPhoto();
-    setLoading(false)
+    async function dataPhoto(){
+      setLoading(false);
+      try{
+        const pict = await fetch(`https://gallery-app-server.vercel.app/photos/${id}`)
+        const response = await pict.json();
+        response.error && setError(response.error);
+        setImageUrl(response.imageUrl);
+        setCaptions(response.captions);
+      }
+      catch(error){setError(error)}
+    }
+    dataPhoto()
   }, [id]);
 
   if (error) return <div>Error!</div>;
